@@ -145,6 +145,33 @@ class Pages extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey, fontSize: 10),
             )),
+        SizedBox(
+          height: 30.h,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 50.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                  width: 20.w,
+                  child: Image.asset('assets/images/boardingPage/forword.png')),
+            ],
+          ),
+        )
+        /*   Container(
+            child: Text("Далее",
+                style: new TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    foreground: Paint()
+                      ..shader = LinearGradient(
+                        colors: <Color>[
+                          Colors.black,
+                          Colors.orange
+                          //add more color here.
+                        ],
+                      ).createShader(Rect.fromLTRB(0, 10, 0, 20))))) */
       ]),
     );
   }
