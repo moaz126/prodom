@@ -9,7 +9,7 @@ class FirstButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 50.w,
+        width: 80.w,
         height: 6.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(

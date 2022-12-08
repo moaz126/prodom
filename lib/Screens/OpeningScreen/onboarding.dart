@@ -1,40 +1,54 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../widget/buttonWidget.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
 }
 
+int _curr = 0;
+PageController controller = PageController();
+
 class _OnBoardingPageState extends State<OnBoardingPage> {
-  PageController controller = PageController();
   List<Widget> _list = <Widget>[
     new Center(
         child: new Pages(
-      text: "Page 1",
+      text:
+          "Вы можете посмотреть на наш каталог домов и связаться с нами для строительства дома вашей мечты",
       image: 'intro1.png',
+      textImage: 'Text1.png',
+      last: true,
     )),
     new Center(
         child: new Pages(
-      text: "Page 2",
-      image: 'intro1.png',
+      text:
+          "У нас вы можете посмотреть дома в разных архитектурных стилях и выбрать тот который вам понравилаь",
+      image: 'intro2.png',
+      textImage: 'Text2.png',
+      last: true,
     )),
     new Center(
         child: new Pages(
-      text: "Page 3",
-      image: 'intro1.png',
+      text: "Дома в стиле: Барнхаус, Классический, Хай-Тек, Минимализм...",
+      image: 'intro3.png',
+      textImage: 'Text3.png',
+      last: true,
     )),
     new Center(
-        child: new Pages(
-      text: "Page 4",
+        child: new LastPages(
+      text: "Чего ты ждешь? Твой дом мечты ты найдешь у нас",
       image: 'intro1.png',
+      textImage: 'Text4.png',
+      last: false,
     ))
   ];
-  int _curr = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +78,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               },
             ),
             Positioned(
-              bottom: 30.h,
+              bottom: 35.h,
               child: AnimatedSmoothIndicator(
                 activeIndex: _curr,
                 count: 4,
@@ -81,33 +95,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             ),
           ],
         ),
-        /* floatingActionButton: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FloatingActionButton(
-                    onPressed: () {
-                      setState(() {
-                        _list.add(
-                          new Center(
-                              child: new Text("New page",
-                                  style: new TextStyle(fontSize: 35.0))),
-                        );
-                      });
-                      if (_curr != _list.length - 1)
-                        controller.jumpToPage(_curr + 1);
-                      else
-                        controller.jumpToPage(0);
-                    },
-                    child: Icon(Icons.add)),
-                FloatingActionButton(
-                    onPressed: () {
-                      _list.removeAt(_curr);
-                      setState(() {
-                        controller.jumpToPage(_curr - 1);
-                      });
-                    },
-                    child: Icon(Icons.delete)),
-              ]) */
       ),
     );
   }
@@ -116,62 +103,153 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 class Pages extends StatelessWidget {
   final text;
   final String image;
-  Pages({this.text, required this.image});
+  final String textImage;
+  final bool last;
+  Pages(
+      {this.text,
+      required this.image,
+      required this.textImage,
+      required this.last});
   @override
   Widget build(BuildContext context) {
     return Center(
       child:
           Column(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-        Container(
-          height: 30.h,
-          child: Image.asset(
-            'assets/images/$image',
-            fit: BoxFit.fitHeight,
-          ),
-        ),
+        last
+            ? Container(
+                height: 30.h,
+                child: Image.asset(
+                  'assets/images/$image',
+                  fit: BoxFit.fitHeight,
+                ),
+              )
+            : Column(
+                children: [
+                  SizedBox(
+                    height: 7.h,
+                  ),
+                  Container(
+                    height: 23.h,
+                    width: 60.w,
+                    child: Image.asset(
+                      'assets/images/boardingPage/ProDom.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
+              ),
         SizedBox(
           height: 20.h,
         ),
         Container(
-            width: 80.w,
-            child: Image.asset('assets/images/boardingPage/firstText.png')),
+            width: 65.w,
+            child: Image.asset('assets/images/boardingPage/$textImage')),
         SizedBox(
-          height: 2.h,
+          height: 1.h,
         ),
         Container(
             width: 80.w,
             child: Text(
-              'Вы можете посмотреть на наш каталог домов и связаться с нами для строительства дома вашей мечты',
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey, fontSize: 10),
+            )),
+        SizedBox(
+          height: 36.h,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 30.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                onTap: () {
+                  if (_curr != 4 - 1)
+                    controller.jumpToPage(_curr + 1);
+                  else
+                    controller.jumpToPage(0);
+                },
+                child: Container(
+                    width: 15.w,
+                    child:
+                        Image.asset('assets/images/boardingPage/forword.png')),
+              ),
+            ],
+          ),
+        )
+      ]),
+    );
+  }
+}
+
+class LastPages extends StatelessWidget {
+  final text;
+  final String image;
+  final String textImage;
+  final bool last;
+  LastPages(
+      {this.text,
+      required this.image,
+      required this.textImage,
+      required this.last});
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+        last
+            ? Container(
+                height: 30.h,
+                child: Image.asset(
+                  'assets/images/$image',
+                  fit: BoxFit.fitHeight,
+                ),
+              )
+            : Column(
+                children: [
+                  SizedBox(
+                    height: 7.h,
+                  ),
+                  Container(
+                    height: 23.h,
+                    width: 60.w,
+                    child: Image.asset(
+                      'assets/images/boardingPage/ProDom.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
+              ),
+        SizedBox(
+          height: 20.h,
+        ),
+        Container(
+            width: 65.w,
+            child: Image.asset('assets/images/boardingPage/$textImage')),
+        SizedBox(
+          height: 1.h,
+        ),
+        Container(
+            width: 80.w,
+            child: Text(
+              text,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey, fontSize: 10),
             )),
         SizedBox(
           height: 30.h,
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 50.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                  width: 20.w,
-                  child: Image.asset('assets/images/boardingPage/forword.png')),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () {},
+              child: FirstButton(
+                text: 'Начать',
+              ),
+            ),
+          ],
         )
-        /*   Container(
-            child: Text("Далее",
-                style: new TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    foreground: Paint()
-                      ..shader = LinearGradient(
-                        colors: <Color>[
-                          Colors.black,
-                          Colors.orange
-                          //add more color here.
-                        ],
-                      ).createShader(Rect.fromLTRB(0, 10, 0, 20))))) */
       ]),
     );
   }
