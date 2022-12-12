@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:prodom/Screens/HomePage/homePage.dart';
+import 'package:prodom/constants/constant.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -67,9 +69,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             PageView(
               children: _list,
               scrollDirection: Axis.horizontal,
-
-              // reverse: true,
-              // physics: BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
+              scrollBehavior: ScrollBehavior(),
               controller: controller,
               onPageChanged: (num) {
                 setState(() {
@@ -77,7 +78,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 });
               },
             ),
-            Positioned(
+            /* Positioned(
               bottom: 35.h,
               child: AnimatedSmoothIndicator(
                 activeIndex: _curr,
@@ -88,14 +89,111 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   radius: 10,
                   dotHeight: 10,
                   dotWidth: 10,
-                  activeDotColor: Color.fromARGB(255, 153, 102, 26),
+                  activeDotColor: /* Color.fromARGB(255, 153, 102, 26) */ primary,
                   paintStyle: PaintingStyle.fill,
                 ),
               ),
-            ),
+            ), */
+            Positioned(
+                bottom: 35.h,
+                child: _curr == 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          dotfill(),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          dotunfill(),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          dotunfill(),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          dotunfill(),
+                        ],
+                      )
+                    : _curr == 1
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              dotfill(),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              dotfill(),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              dotunfill(),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              dotunfill(),
+                            ],
+                          )
+                        : _curr == 2
+                            ? Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  dotfill(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  dotfill(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  dotfill(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  dotunfill(),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  dotfill(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  dotfill(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  dotfill(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  dotfill(),
+                                ],
+                              )),
           ],
         ),
       ),
+    );
+  }
+
+  Widget dotfill() {
+    return Container(
+      height: 10,
+      width: 10,
+      decoration: BoxDecoration(
+          color: primary, borderRadius: BorderRadius.circular(30)),
+    );
+  }
+
+  Widget dotunfill() {
+    return Container(
+      height: 10,
+      width: 10,
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(30)),
     );
   }
 }
@@ -243,7 +341,9 @@ class LastPages extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(() => HomePage());
+              },
               child: FirstButton(
                 text: 'Начать',
               ),
