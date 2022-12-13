@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prodom/Screens/HomePage/contact_us.dart';
 import 'package:prodom/Screens/HomePage/favorite.dart';
+import 'package:prodom/Screens/HomePage/houseDetailPage.dart';
 import 'package:prodom/constants/constant.dart';
 import 'package:sizer/sizer.dart';
 
@@ -127,28 +128,33 @@ class _HomePageState extends State<HomePage> {
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 22.0),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    height: 170,
-                                    width: 90.w,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        houseList[index],
-                                        fit: BoxFit.cover,
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(() => HouseDetail());
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 170,
+                                      width: 90.w,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.asset(
+                                          houseList[index],
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                      right: 5,
-                                      top: 8,
-                                      child: Image.asset(
-                                        'assets/images/homePage/heart.png',
-                                        height: 22,
-                                        width: 22,
-                                      ))
-                                ],
+                                    Positioned(
+                                        right: 5,
+                                        top: 8,
+                                        child: Image.asset(
+                                          'assets/images/homePage/heart.png',
+                                          height: 22,
+                                          width: 22,
+                                        ))
+                                  ],
+                                ),
                               ),
                             );
                           },
