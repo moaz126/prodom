@@ -1,4 +1,4 @@
-package com.example.prodom
+package com.prodom.app
 
 import io.flutter.embedding.android.FlutterActivity
 

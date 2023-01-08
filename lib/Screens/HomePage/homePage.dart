@@ -1,10 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prodom/Screens/HomePage/contact_us.dart';
 import 'package:prodom/Screens/HomePage/favorite.dart';
+import 'package:prodom/Screens/HomePage/filter.dart';
 import 'package:prodom/Screens/HomePage/houseDetailPage.dart';
+import 'package:prodom/Screens/HomePage/menu.dart';
+import 'package:prodom/Screens/model/HouseModel.dart';
 import 'package:prodom/constants/constant.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../constants/globalVariable.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +21,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Stream<QuerySnapshot> _stream;
+
+  CollectionReference _reference =
+      FirebaseFirestore.instance.collection('house');
+
   List<String> houseList = [
     'assets/images/homePage/house1.png',
     'assets/images/homePage/house2.png',
@@ -22,6 +34,13 @@ class _HomePageState extends State<HomePage> {
     'assets/images/homePage/house5.jpg',
     'assets/images/homePage/house6.jpg',
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _stream = _reference.snapshots();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,9 +61,52 @@ class _HomePageState extends State<HomePage> {
                           child:
                               Image.asset('assets/images/homePage/ProDom.png'),
                         ),
-                        Container(
-                          width: 10.w,
-                          child: Image.asset('assets/images/homePage/menu.png'),
+                        InkWell(
+                          onTap: () {
+                            Get.to(Menu());
+                            /*    FirebaseFirestore.instance.collection('house').add({
+                              "images": ['f', 'c', 'd'],
+                              "gbathroom": 2,
+                              'gbedroom': 2,
+                              'ghall': 2,
+                              'ghalway': 2,
+                              'gkitchen': 2,
+                              'gliving': 2,
+                              'grestroom': 2,
+                              'gpantry': 2,
+                              'groundL': 2,
+                              'groundW': 2,
+                              'gwardrobe': 2,
+                              'atticL': 2,
+                              'atticW': 2,
+                              'abathroom': 2,
+                              'abedroom': 2,
+                              'ahall': 2,
+                              'ahalway': 2,
+                              'akitchen': 2,
+                              'aliving': 2,
+                              'arestroom': 2,
+                              'apantry': 2,
+                              'awardrobe': 2,
+                              'dbathroom': 2,
+                              'dbedroom': 2,
+                              'dhall': 2,
+                              'dhalway': 2,
+                              'dkitchen': 2,
+                              'dliving': 2,
+                              'drestroom': 2,
+                              'dpantry': 2,
+                              'dwardrobe': 2,
+                              'technology': 'SDGRSGRDGRDGRD',
+                              'psoCost': 4445,
+                              'turnkeyCost': 7444,
+                            }); */
+                          },
+                          child: Container(
+                            width: 10.w,
+                            child:
+                                Image.asset('assets/images/homePage/menu.png'),
+                          ),
                         ),
                       ],
                     ),
@@ -101,10 +163,15 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Container(
-                          height: 6.h,
-                          child:
-                              Image.asset('assets/images/homePage/filter.png'),
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => Filter());
+                          },
+                          child: Container(
+                            height: 6.h,
+                            child: Image.asset(
+                                'assets/images/homePage/filter.png'),
+                          ),
                         ),
                       ],
                     ),
@@ -123,40 +190,120 @@ class _HomePageState extends State<HomePage> {
                       minOverscrollLength: 5,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 20.0),
-                        child: ListView.builder(
-                          itemCount: houseList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 22.0),
-                              child: InkWell(
-                                onTap: () {
-                                  Get.to(() => HouseDetail());
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 170,
-                                      width: 90.w,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          houseList[index],
-                                          fit: BoxFit.cover,
-                                        ),
+                        child: StreamBuilder<QuerySnapshot>(
+                          stream: _stream,
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            //Check error
+                            if (snapshot.hasError) {
+                              return Center(
+                                  child: Text(
+                                      'Some error occurred ${snapshot.error}'));
+                            }
+
+                            //Check if data arrived
+                            if (snapshot.hasData) {
+                              //get the data
+                              QuerySnapshot querySnapshot = snapshot.data;
+                              List<QueryDocumentSnapshot> documents =
+                                  querySnapshot.docs;
+
+                              //Convert the documents to Maps
+                              /*   List<Map> items = documents
+                                  .map((e) => {
+                                        'id': e.id,
+                                        'address': e['address'],
+                                        'dim': e['dimension'],
+                                        'room': e['rooms'],
+                                      })
+                                  .toList(); */
+                              houseDesignList = List<HouseModel>.from(
+                                  documents.map((x) => HouseModel.fromJson(x)));
+                              print('dddddddddddddddddddddddd');
+                              print(houseDesignList[0].images[0]);
+
+                              //Display the list
+                              return ListView.builder(
+                                itemCount: houseDesignList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 22.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.to(() => HouseDetail(index));
+                                        print(houseDesignList[index].ghall);
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            height: 170,
+                                            width: 90.w,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: houseDesignList[index]
+                                                    .thumbnail,
+                                                placeholder: (context, url) =>
+                                                    Image.asset(
+                                                  'assets/images/homePage/house1.png',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                errorWidget: (context, url,
+                                                        error) => /* Icon(Icons
+                              .person) */
+                                                    Image.asset(
+                                                  'assets/images/homePage/house1.png',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                              right: 5,
+                                              top: 8,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  if (favor.contains(
+                                                          houseDesignList[index]
+                                                              .id) ==
+                                                      false) {
+                                                    print('object');
+                                                    favor.add(
+                                                        houseDesignList[index]
+                                                            .id);
+                                                    favouriteList.add(
+                                                        houseDesignList[index]);
+                                                  }
+                                                  setState(() {});
+                                                },
+                                                child: Image.asset(
+                                                  'assets/images/homePage/heart.png',
+                                                  height: 22,
+                                                  width: 22,
+                                                  color: favor.contains(
+                                                          houseDesignList[index]
+                                                              .id)
+                                                      ? Colors.red
+                                                      : Colors.white,
+                                                ),
+                                              ))
+                                        ],
                                       ),
                                     ),
-                                    Positioned(
-                                        right: 5,
-                                        top: 8,
-                                        child: Image.asset(
-                                          'assets/images/homePage/heart.png',
-                                          height: 22,
-                                          width: 22,
-                                        ))
-                                  ],
-                                ),
-                              ),
-                            );
+                                  );
+                                },
+                              );
+                            }
+
+                            //Show loader
+                            return Center(child: CircularProgressIndicator());
                           },
                         ),
                       ),

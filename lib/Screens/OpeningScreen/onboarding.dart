@@ -25,7 +25,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       text:
           "Вы можете посмотреть на наш каталог домов и связаться с нами для строительства дома вашей мечты",
       image: 'intro1.png',
-      textImage: 'Text1.png',
+      textImage: 'Найди дом своей мечты',
       last: true,
     )),
     new Center(
@@ -33,21 +33,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       text:
           "У нас вы можете посмотреть дома в разных архитектурных стилях и выбрать тот который вам понравилаь",
       image: 'intro2.png',
-      textImage: 'Text2.png',
+      textImage: 'Более 200+ проектов',
       last: true,
     )),
     new Center(
         child: new Pages(
       text: "Дома в стиле: Барнхаус, Классический, Хай-Тек, Минимализм...",
       image: 'intro3.png',
-      textImage: 'Text3.png',
+      textImage: 'Дома на любой вкус',
       last: true,
     )),
     new Center(
         child: new LastPages(
       text: "Чего ты ждешь? Твой дом мечты ты найдешь у нас",
       image: 'intro1.png',
-      textImage: 'Text4.png',
+      textImage: 'Твой дом мечты тут',
       last: false,
     ))
   ];
@@ -173,6 +173,32 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                   dotfill(),
                                 ],
                               )),
+            /*  Positioned(
+              bottom: 30,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        controller.nextPage(
+                            duration: Duration(milliseconds: 1000),
+                            curve: Curves.easeIn);
+                        /*    if (_curr != 4 - 1)
+                    controller.jumpToPage(_curr + 1);
+                  else
+                    controller.jumpToPage(0); */
+                      },
+                      child: Container(
+                          width: 15.w,
+                          child: Image.asset(
+                              'assets/images/boardingPage/forword.png')),
+                    ),
+                  ],
+                ),
+              ),
+            ) */
           ],
         ),
       ),
@@ -240,8 +266,23 @@ class Pages extends StatelessWidget {
           height: 20.h,
         ),
         Container(
+          // U5v (5:36)
+          width: double.infinity,
+          height: 33,
+          alignment: Alignment.center,
+          child: Text(
+            textImage,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w900,
+              color: Color(0xffffffff),
+              decorationColor: Color(0xffffffff),
+            ),
+          ),
+        ),
+        /*  Container(
             width: 65.w,
-            child: Image.asset('assets/images/boardingPage/$textImage')),
+            child: Image.asset('assets/images/boardingPage/$textImage')), */
         SizedBox(
           height: 1.h,
         ),
@@ -262,10 +303,13 @@ class Pages extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  if (_curr != 4 - 1)
+                  controller.nextPage(
+                      duration: Duration(milliseconds: 700),
+                      curve: Curves.easeIn);
+                  /*    if (_curr != 4 - 1)
                     controller.jumpToPage(_curr + 1);
                   else
-                    controller.jumpToPage(0);
+                    controller.jumpToPage(0); */
                 },
                 child: Container(
                     width: 15.w,
@@ -274,7 +318,7 @@ class Pages extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ]),
     );
   }
@@ -322,8 +366,23 @@ class LastPages extends StatelessWidget {
           height: 20.h,
         ),
         Container(
+          // U5v (5:36)
+          width: double.infinity,
+          height: 33,
+          alignment: Alignment.center,
+          child: Text(
+            textImage,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w900,
+              color: Color(0xffffffff),
+              decorationColor: Color(0xffffffff),
+            ),
+          ),
+        ),
+        /*  Container(
             width: 65.w,
-            child: Image.asset('assets/images/boardingPage/$textImage')),
+            child: Image.asset('assets/images/boardingPage/$textImage')), */
         SizedBox(
           height: 1.h,
         ),

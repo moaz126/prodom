@@ -106,7 +106,7 @@ class _ContactUsState extends State<ContactUs> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Get.to(() => Help());
+                                          Get.to(() => AboutUs());
                                         },
                                         child: Container(
                                           // rectangle24KCq (8:44)

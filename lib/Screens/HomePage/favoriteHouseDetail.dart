@@ -8,15 +8,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../constants/globalVariable.dart';
 
-class HouseDetail extends StatefulWidget {
+class favroiteHouseDetail extends StatefulWidget {
   final int index;
-  HouseDetail(this.index);
+  favroiteHouseDetail(this.index);
 
   @override
-  State<HouseDetail> createState() => _HouseDetailState();
+  State<favroiteHouseDetail> createState() => _favroiteHouseDetailState();
 }
 
-class _HouseDetailState extends State<HouseDetail> {
+class _favroiteHouseDetailState extends State<favroiteHouseDetail> {
   int activeIndex = 0;
 
   @override
@@ -49,7 +49,7 @@ class _HouseDetailState extends State<HouseDetail> {
                     SizedBox(
                       height: 20.h,
                       child: CarouselSlider.builder(
-                        itemCount: houseDesignList[widget.index].images.length,
+                        itemCount: favouriteList[widget.index].images.length,
                         itemBuilder: (BuildContext context, int itemIndex,
                                 int pageViewIndex) =>
                             ClipRRect(
@@ -57,7 +57,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl:
-                                houseDesignList[widget.index].images[itemIndex],
+                                favouriteList[widget.index].images[itemIndex],
                             placeholder: (context, url) => Image.asset(
                               'assets/images/homePage/house1.png',
                               fit: BoxFit.cover,
@@ -91,7 +91,7 @@ class _HouseDetailState extends State<HouseDetail> {
                       right: 45.w,
                       child: AnimatedSmoothIndicator(
                         activeIndex: activeIndex,
-                        count: houseDesignList[widget.index].images.length,
+                        count: favouriteList[widget.index].images.length,
                         curve: Curves.bounceInOut,
                         effect: SlideEffect(
                           spacing: 5,
@@ -119,7 +119,7 @@ class _HouseDetailState extends State<HouseDetail> {
                       width: 160,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: houseDesignList[widget.index].interior1,
+                        imageUrl: favouriteList[widget.index].interior1,
                         placeholder: (context, url) => Image.asset(
                           'assets/images/homePage/houseMap.png',
                           fit: BoxFit.cover,
@@ -142,7 +142,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           width: 40.w,
                           height: 15,
                           child: Text(
-                            '1-ЫЙ ЭТАЖ ${houseDesignList[widget.index].groundL} / ${houseDesignList[widget.index].groundW} m²',
+                            '1-ЫЙ ЭТАЖ ${favouriteList[widget.index].groundL} / ${favouriteList[widget.index].groundW} m²',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
@@ -158,7 +158,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           width: 40.w,
                           height: 108,
                           child: Text(
-                            'Прихожая                 ${houseDesignList[widget.index].ghalway} m²\nГардеробная            ${houseDesignList[widget.index].gwardrobe} m²\nХолл                           ${houseDesignList[widget.index].ghall} m²\nСпальня                    ${houseDesignList[widget.index].gbedroom} m²\nВанная комната      ${houseDesignList[widget.index].gbathroom} m²\nГостиная                   ${houseDesignList[widget.index].gliving} m²\nКухня + столовая    ${houseDesignList[widget.index].gkitchen} m²\nКладовая                   ${houseDesignList[widget.index].gpantry} m²\nКомната отдыха       ${houseDesignList[widget.index].grestroom} m²\n\n',
+                            'Прихожая                 ${favouriteList[widget.index].ghalway} m²\nГардеробная            ${favouriteList[widget.index].gwardrobe} m²\nХолл                           ${favouriteList[widget.index].ghall} m²\nСпальня                    ${favouriteList[widget.index].gbedroom} m²\nВанная комната      ${favouriteList[widget.index].gbathroom} m²\nГостиная                   ${favouriteList[widget.index].gliving} m²\nКухня + столовая    ${favouriteList[widget.index].gkitchen} m²\nКладовая                   ${favouriteList[widget.index].gpantry} m²\nКомната отдыха       ${favouriteList[widget.index].grestroom} m²\n\n',
                             style: TextStyle(
                               fontSize: 6,
                               fontWeight: FontWeight.w400,
@@ -185,7 +185,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           width: 40.w,
                           height: 15,
                           child: Text(
-                            '1-ЫЙ ЭТАЖ ${houseDesignList[widget.index].atticL} / ${houseDesignList[widget.index].atticW} m²',
+                            '1-ЫЙ ЭТАЖ ${favouriteList[widget.index].atticL} / ${favouriteList[widget.index].atticW} m²',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
@@ -201,7 +201,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           width: 40.w,
                           height: 108,
                           child: Text(
-                            'Прихожая                  ${houseDesignList[widget.index].ahalway} m²\nГардеробная             ${houseDesignList[widget.index].awardrobe} m²\nХолл                            ${houseDesignList[widget.index].ahall} m²\nСпальня                     ${houseDesignList[widget.index].abedroom} m²\nВанная комната      ${houseDesignList[widget.index].abathroom} m²\nГостиная                    ${houseDesignList[widget.index].aliving} m²\nКухня + столовая    ${houseDesignList[widget.index].akitchen} m²\nКладовая                   ${houseDesignList[widget.index].apantry} m²\nКомната отдыха      ${houseDesignList[widget.index].arestroom} m²\n\n',
+                            'Прихожая                  ${favouriteList[widget.index].ahalway} m²\nГардеробная             ${favouriteList[widget.index].awardrobe} m²\nХолл                            ${favouriteList[widget.index].ahall} m²\nСпальня                     ${favouriteList[widget.index].abedroom} m²\nВанная комната      ${favouriteList[widget.index].abathroom} m²\nГостиная                    ${favouriteList[widget.index].aliving} m²\nКухня + столовая    ${favouriteList[widget.index].akitchen} m²\nКладовая                   ${favouriteList[widget.index].apantry} m²\nКомната отдыха      ${favouriteList[widget.index].arestroom} m²\n\n',
                             style: TextStyle(
                               fontSize: 6,
                               fontWeight: FontWeight.w400,
@@ -220,7 +220,7 @@ class _HouseDetailState extends State<HouseDetail> {
                       width: 160,
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: houseDesignList[widget.index].interior2,
+                        imageUrl: favouriteList[widget.index].interior2,
                         placeholder: (context, url) => Image.asset(
                           'assets/images/homePage/houseMap2.png',
                           fit: BoxFit.cover,
@@ -264,7 +264,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           width: 40.w,
                           height: 108,
                           child: Text(
-                            'Прихожая                 ${houseDesignList[widget.index].dhalway} m²\nГардеробная            ${houseDesignList[widget.index].dwardrobe} m²\nХолл                           ${houseDesignList[widget.index].dhall} m²\nСпальня                    ${houseDesignList[widget.index].dbedroom} m²\nВанная комната      ${houseDesignList[widget.index].dbathroom} m²\nГостиная                   ${houseDesignList[widget.index].dliving} m²\nКухня + столовая    ${houseDesignList[widget.index].dkitchen} m²\nКладовая                   ${houseDesignList[widget.index].dpantry} m²\nКомната отдыха       ${houseDesignList[widget.index].drestroom} m²\n\n',
+                            'Прихожая                 ${favouriteList[widget.index].dhalway} m²\nГардеробная            ${favouriteList[widget.index].dwardrobe} m²\nХолл                           ${favouriteList[widget.index].dhall} m²\nСпальня                    ${favouriteList[widget.index].dbedroom} m²\nВанная комната      ${favouriteList[widget.index].dbathroom} m²\nГостиная                   ${favouriteList[widget.index].dliving} m²\nКухня + столовая    ${favouriteList[widget.index].dkitchen} m²\nКладовая                   ${favouriteList[widget.index].dpantry} m²\nКомната отдыха       ${favouriteList[widget.index].drestroom} m²\n\n',
                             style: TextStyle(
                               fontSize: 6,
                               fontWeight: FontWeight.w400,
@@ -302,7 +302,7 @@ class _HouseDetailState extends State<HouseDetail> {
                           width: 40.w,
                           height: 54,
                           child: Text(
-                            houseDesignList[widget.index].technology,
+                            favouriteList[widget.index].technology,
                             // 'Стены  - газобетон/керамические блоки/пеноблоки/пенобетон\nТип фундамента - ленточный сборно-монолитный\nКровля - цементно-песчаная черепица/металлочерепица/керамическая черепица\nТехнология - каменный\nТип перекрытия - монолитное\n',
                             style: TextStyle(
                               fontSize: 6,
@@ -333,7 +333,7 @@ class _HouseDetailState extends State<HouseDetail> {
 
                       height: 15,
                       child: Text(
-                        'Стоимость под ПСО - ${houseDesignList[widget.index].psoCost}\$',
+                        'Стоимость под ПСО - ${favouriteList[widget.index].psoCost}\$',
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
@@ -352,7 +352,7 @@ class _HouseDetailState extends State<HouseDetail> {
 
                       height: 15,
                       child: Text(
-                        'Стоимость под ключ - ${houseDesignList[widget.index].turnkeyCost}\$',
+                        'Стоимость под ключ - ${favouriteList[widget.index].turnkeyCost}\$',
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,

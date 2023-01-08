@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prodom/Screens/HomePage/contact_us.dart';
+import 'package:prodom/Screens/HomePage/favoriteHouseDetail.dart';
 import 'package:prodom/Screens/HomePage/homePage.dart';
 import 'package:prodom/constants/constant.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../constants/globalVariable.dart';
 
 class Favorite extends StatefulWidget {
   const Favorite({super.key});
@@ -13,7 +17,7 @@ class Favorite extends StatefulWidget {
 }
 
 class _FavoriteState extends State<Favorite> {
-  List<String> houseList = [
+  List<String> favourite = [
     'assets/images/homePage/house1.png',
     'assets/images/homePage/house2.png',
     'assets/images/homePage/house3.jpg',
@@ -39,31 +43,54 @@ class _FavoriteState extends State<Favorite> {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: ListView.builder(
-                  itemCount: houseList.length,
+                  itemCount: favouriteList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 22.0),
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 170,
-                            width: 90.w,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                houseList[index],
-                                fit: BoxFit.cover,
+                    return InkWell(
+                      onTap: () {
+                        Get.to(() => favroiteHouseDetail(index));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 22.0),
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 170,
+                              width: 90.w,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: favouriteList[index].thumbnail,
+                                  placeholder: (context, url) => Image.asset(
+                                    'assets/images/homePage/house1.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                  errorWidget: (context, url,
+                                          error) => /* Icon(Icons
+                                .person) */
+                                      Image.asset(
+                                    'assets/images/homePage/house1.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                              right: 5,
-                              top: 8,
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                              ))
-                        ],
+                            Positioned(
+                                right: 5,
+                                top: 8,
+                                child: InkWell(
+                                  onTap: () {
+                                    favor.remove(favouriteList[index].id);
+                                    favouriteList.removeAt(index);
+                                    setState(() {});
+                                  },
+                                  child: Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                  ),
+                                ))
+                          ],
+                        ),
                       ),
                     );
                   },

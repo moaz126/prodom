@@ -5,14 +5,14 @@ import 'package:prodom/Screens/HomePage/favorite.dart';
 import 'package:prodom/Screens/HomePage/homePage.dart';
 import 'package:sizer/sizer.dart';
 
-class Help extends StatefulWidget {
-  const Help({super.key});
+class AboutUs extends StatefulWidget {
+  const AboutUs({super.key});
 
   @override
-  State<Help> createState() => _HelpState();
+  State<AboutUs> createState() => _AboutUsState();
 }
 
-class _HelpState extends State<Help> {
+class _AboutUsState extends State<AboutUs> {
   List<String> iconList = [
     'assets/images/instagram.png',
     'assets/images/whatsapp.png',
