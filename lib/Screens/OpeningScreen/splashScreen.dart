@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:prodom/Screens/HomePage/homePage.dart';
 import 'package:prodom/Screens/OpeningScreen/openingPage.dart';
+import 'package:prodom/constants/globalVariable.dart';
 import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,7 +14,11 @@ class SplashScreen extends StatefulWidget {
 
 class SplashScreenState extends State<SplashScreen> {
   getstate() async {
-    Timer(Duration(seconds: 2), () => Get.to(() => OpeningScreen()));
+    if (getUserFirstTime() == false) {
+      Timer(Duration(seconds: 2), () => Get.to(() => HomePage()));
+    } else {
+      Timer(Duration(seconds: 2), () => Get.to(() => OpeningScreen()));
+    }
   }
 
   @override
@@ -24,6 +30,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment(0.0, 0.0),
@@ -32,14 +39,11 @@ class SplashScreenState extends State<SplashScreen> {
           ),
         ),
         child: SizedBox(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 70.0),
-          child: Image.asset(
-            "assets/images/splashLogo.png",
-            height: 30,
-            width: 60,
-            fit: BoxFit.contain,
-          ),
+            child: Image.asset(
+          "assets/images/splashLogo.png",
+          height: 80,
+          width: 60.w,
+          fit: BoxFit.fitWidth,
         )));
   }
 }

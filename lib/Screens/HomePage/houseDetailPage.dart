@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prodom/Screens/HomePage/contact_us.dart';
 import 'package:prodom/constants/constant.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -47,7 +48,7 @@ class _HouseDetailState extends State<HouseDetail> {
                 child: Stack(
                   children: [
                     SizedBox(
-                      height: 20.h,
+                      height: 25.h,
                       child: CarouselSlider.builder(
                         itemCount: houseDesignList[widget.index].images.length,
                         itemBuilder: (BuildContext context, int itemIndex,
@@ -55,21 +56,21 @@ class _HouseDetailState extends State<HouseDetail> {
                             ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl:
-                                houseDesignList[widget.index].images[itemIndex],
-                            placeholder: (context, url) => Image.asset(
-                              'assets/images/homePage/house1.png',
                               fit: BoxFit.cover,
-                            ),
-                            errorWidget: (context, url,
-                                    error) => /* Icon(Icons
+                              imageUrl: houseDesignList[widget.index]
+                                  .images[itemIndex],
+                              placeholder: (context, url) => Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                              errorWidget: (context, url,
+                                      error) => /* Icon(Icons
                               .person) */
-                                Image.asset(
-                              'assets/images/homePage/house1.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                                  Center(
+                                    child: Icon(
+                                      Icons.error_outline,
+                                      color: Colors.red,
+                                    ),
+                                  )),
                         ),
                         options: CarouselOptions(
                             autoPlay: false,
@@ -87,8 +88,10 @@ class _HouseDetailState extends State<HouseDetail> {
                     ),
                     Positioned(
                       bottom: 10,
-                      left: 45.w,
+                      left: 40.w,
+                      /*  left: 45.w,
                       right: 45.w,
+                       */
                       child: AnimatedSmoothIndicator(
                         activeIndex: activeIndex,
                         count: houseDesignList[widget.index].images.length,
@@ -369,41 +372,48 @@ class _HouseDetailState extends State<HouseDetail> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                // group2QBX (86:3)
+              InkWell(
+                onTap: () {
+                  Get.off(() => ContactUs());
+                },
+                child: Container(
+                  // group2QBX (86:3)
 
-                padding: EdgeInsets.fromLTRB(41, 10, 62, 10),
-                width: 90.w,
-                decoration: BoxDecoration(
-                  color: Color(0xff956b00),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      // download21removebgpreview2TQh (9:94)
-                      margin: EdgeInsets.fromLTRB(0, 1, 22, 0),
-                      width: 24,
-                      height: 24,
-                      child: Image.asset(
-                        'assets/images/phone.png',
-                        fit: BoxFit.cover,
+                  padding: EdgeInsets.fromLTRB(41, 10, 62, 10),
+                  width: 90.w,
+                  decoration: BoxDecoration(
+                    color: Color(0xff956b00),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  alignment: Alignment.center,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        // download21removebgpreview2TQh (9:94)
+                        margin: EdgeInsets.fromLTRB(0, 1, 22, 0),
+                        width: 24,
+                        height: 24,
+                        child: Image.asset(
+                          'assets/images/phone.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Text(
-                      // NGm (9:95)
-                      'Связаться с нами',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        height: 1.5,
-                        decoration: TextDecoration.underline,
-                        color: Color(0xffffffff),
-                        decorationColor: Color(0xffffffff),
+                      Text(
+                        // NGm (9:95)
+                        'Связаться с нами',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          height: 1.5,
+                          decoration: TextDecoration.underline,
+                          color: Color(0xffffffff),
+                          decorationColor: Color(0xffffffff),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

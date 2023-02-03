@@ -5,6 +5,8 @@ import 'package:prodom/Screens/OpeningScreen/onboarding.dart';
 import 'package:prodom/widget/buttonWidget.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../constants/globalVariable.dart';
+
 class OpeningScreen extends StatefulWidget {
   const OpeningScreen({super.key});
 
@@ -58,6 +60,8 @@ class _OpeningScreenState extends State<OpeningScreen> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(30),
                 onTap: () {
+                  setUserFirstTime(false);
+
                   Get.to(() => OnBoardingPage());
                 },
                 child: FirstButton(

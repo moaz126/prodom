@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:prodom/Screens/HomePage/homePage.dart';
 import 'package:prodom/constants/constant.dart';
+import 'package:prodom/constants/globalVariable.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -401,6 +402,7 @@ class LastPages extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
+                setUserFirstTime(false);
                 Get.to(() => HomePage());
               },
               child: FirstButton(

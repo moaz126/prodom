@@ -220,7 +220,6 @@ class _HomePageState extends State<HomePage> {
                               houseDesignList = List<HouseModel>.from(
                                   documents.map((x) => HouseModel.fromJson(x)));
                               print('dddddddddddddddddddddddd');
-                              print(houseDesignList[0].images[0]);
 
                               //Display the list
                               return ListView.builder(
@@ -247,22 +246,23 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               child: CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: houseDesignList[index]
-                                                    .thumbnail,
-                                                placeholder: (context, url) =>
-                                                    Image.asset(
-                                                  'assets/images/homePage/house1.png',
                                                   fit: BoxFit.cover,
-                                                ),
-                                                errorWidget: (context, url,
-                                                        error) => /* Icon(Icons
+                                                  imageUrl:
+                                                      houseDesignList[index]
+                                                          .thumbnail,
+                                                  placeholder: (context, url) =>
+                                                      Center(
+                                                          child:
+                                                              CircularProgressIndicator()),
+                                                  errorWidget: (context, url,
+                                                          error) => /* Icon(Icons
                               .person) */
-                                                    Image.asset(
-                                                  'assets/images/homePage/house1.png',
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error_outline,
+                                                          color: Colors.red,
+                                                        ),
+                                                      )),
                                             ),
                                           ),
                                           Positioned(
